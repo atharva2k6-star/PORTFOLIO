@@ -1,0 +1,333 @@
+/* ==========================================================================
+   CYBERNETIC ARCHITECT - DESIGN SYSTEM & HUD STYLES
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary-glow: #00f0ff;
+    --primary-glow-rgb: 0, 240, 255;
+    --secondary-glow: #ff0055;
+    --secondary-glow-rgb: 255, 0, 85;
+    --accent-glow: #00ff66;
+    --accent-glow-rgb: 0, 255, 102;
+    --gold-glow: #ffb700;
+    --gold-glow-rgb: 255, 183, 0;
+    
+    --bg-dark: #040812;
+    --bg-card: rgba(10, 18, 36, 0.78);
+    --bg-card-hover: rgba(14, 25, 48, 0.9);
+    --border-dim: #1e293b;
+    --border-glow: rgba(var(--primary-glow-rgb), 0.35);
+    
+    --text-main: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    
+    --font-orbitron: 'Orbitron', -apple-system, sans-serif;
+    --font-rajdhani: 'Rajdhani', -apple-system, sans-serif;
+    --font-fira: 'Fira Code', monospace;
+    
+    --nav-height: 68px;
+    --card-clip: polygon(0 14px, 14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px));
+    --btn-clip: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+}
+
+/* Base Styles */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-rajdhani);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-glow) var(--bg-dark);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--primary-glow);
+    box-shadow: 0 0 10px var(--primary-glow);
+    border-radius: 3px;
+}
+
+/* Selection */
+::selection {
+    background: var(--primary-glow);
+    color: #040812;
+}
+
+/* Typography Utilities */
+.font-orbitron { font-family: var(--font-orbitron); }
+.font-rajdhani { font-family: var(--font-rajdhani); }
+.font-fira { font-family: var(--font-fira); }
+
+/* Scanline CRT overlay */
+.scanline-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 0.35;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 0) 50%,
+        rgba(0, 0, 0, 0.4) 50%,
+        rgba(0, 0, 0, 0.4)
+    );
+    background-size: 100% 4px;
+}
+
+/* Neon Glows */
+.glow-text-primary {
+    text-shadow: 0 0 8px rgba(var(--primary-glow-rgb), 0.8), 0 0 20px rgba(var(--primary-glow-rgb), 0.4);
+}
+.glow-text-secondary {
+    text-shadow: 0 0 8px rgba(var(--secondary-glow-rgb), 0.8), 0 0 20px rgba(var(--secondary-glow-rgb), 0.4);
+}
+.glow-box-primary {
+    box-shadow: 0 0 15px rgba(var(--primary-glow-rgb), 0.3), inset 0 0 15px rgba(var(--primary-glow-rgb), 0.1);
+    border: 1px solid rgba(var(--primary-glow-rgb), 0.5);
+}
+.glow-box-hover {
+    transition: all 0.3s ease;
+}
+.glow-box-hover:hover {
+    box-shadow: 0 0 25px rgba(var(--primary-glow-rgb), 0.5), inset 0 0 20px rgba(var(--primary-glow-rgb), 0.15);
+    border-color: var(--primary-glow);
+}
+
+/* Cyber Card Shape */
+.cyber-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--border-glow);
+    position: relative;
+    clip-path: var(--card-clip);
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.cyber-card:hover {
+    border-color: rgba(var(--primary-glow-rgb), 0.7);
+    box-shadow: 0 8px 30px rgba(var(--primary-glow-rgb), 0.15);
+}
+
+/* Corner HUD Brackets */
+.hud-corner-tl, .hud-corner-tr, .hud-corner-bl, .hud-corner-br {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+    z-index: 5;
+}
+.hud-corner-tl {
+    top: 0; left: 0;
+    border-top: 2px solid var(--primary-glow);
+    border-left: 2px solid var(--primary-glow);
+}
+.hud-corner-tr {
+    top: 0; right: 0;
+    border-top: 2px solid var(--primary-glow);
+    border-right: 2px solid var(--primary-glow);
+}
+.hud-corner-bl {
+    bottom: 0; left: 0;
+    border-bottom: 2px solid var(--primary-glow);
+    border-left: 2px solid var(--primary-glow);
+}
+.hud-corner-br {
+    bottom: 0; right: 0;
+    border-bottom: 2px solid var(--primary-glow);
+    border-right: 2px solid var(--primary-glow);
+}
+
+/* Cyber Button */
+.cyber-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-fira);
+    clip-path: var(--btn-clip);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+}
+.cyber-btn:hover {
+    transform: translateY(-2px);
+}
+.cyber-btn:active {
+    transform: translateY(1px);
+}
+
+/* Radar Sweep Animation */
+@keyframes radar-sweep {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.radar-sweep {
+    animation: radar-sweep 4s linear infinite;
+}
+
+/* Pulse Glow Animation */
+@keyframes pulse-slow {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.85; transform: scale(1.03); }
+}
+.animate-pulse-slow {
+    animation: pulse-slow 3s ease-in-out infinite;
+}
+
+/* Terminal Typing Cursor */
+.term-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 1.1em;
+    background-color: var(--primary-glow);
+    animation: blink 1s infinite;
+    vertical-align: middle;
+    margin-left: 4px;
+    box-shadow: 0 0 8px var(--primary-glow);
+}
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Matrix Digital Rain Overlay (hidden by default) */
+#matrix-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+#matrix-canvas.active {
+    opacity: 0.88;
+    pointer-events: auto;
+}
+
+/* Diagnostics HUD Modal */
+.hud-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    background: rgba(3, 7, 18, 0.85);
+    backdrop-filter: blur(16px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.hud-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+.hud-modal-content {
+    background: rgba(9, 17, 34, 0.95);
+    border: 1px solid var(--primary-glow);
+    box-shadow: 0 0 40px rgba(var(--primary-glow-rgb), 0.3);
+    max-width: 580px;
+    width: 100%;
+    clip-path: var(--card-clip);
+    position: relative;
+    padding: 2rem;
+    transform: scale(0.92);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.hud-modal.active .hud-modal-content {
+    transform: scale(1);
+}
+
+/* Sound Wave Visualizer in Header */
+.audio-visualizer {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 14px;
+    width: 18px;
+}
+.audio-visualizer span {
+    width: 3px;
+    background: var(--primary-glow);
+    border-radius: 1px;
+    height: 4px;
+    transition: height 0.15s ease;
+}
+.audio-visualizer.playing span:nth-child(1) { animation: soundBar 0.6s ease infinite alternate; }
+.audio-visualizer.playing span:nth-child(2) { animation: soundBar 0.8s ease 0.2s infinite alternate; }
+.audio-visualizer.playing span:nth-child(3) { animation: soundBar 0.5s ease 0.4s infinite alternate; }
+.audio-visualizer.playing span:nth-child(4) { animation: soundBar 0.7s ease 0.1s infinite alternate; }
+
+@keyframes soundBar {
+    0% { height: 3px; }
+    100% { height: 14px; }
+}
+
+/* Glitch Text Effect */
+.glitch-text {
+    position: relative;
+}
+.glitch-text::before, .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    clip: rect(0, 0, 0, 0);
+}
+.glitch-text:hover::before {
+    left: -2px;
+    text-shadow: 2px 0 var(--secondary-glow);
+    animation: glitch-anim-1 0.75s infinite linear alternate-reverse;
+}
+.glitch-text:hover::after {
+    left: 2px;
+    text-shadow: -2px 0 var(--primary-glow);
+    animation: glitch-anim-2 0.75s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+    0% { clip: rect(10px, 9999px, 35px, 0); }
+    20% { clip: rect(50px, 9999px, 80px, 0); }
+    40% { clip: rect(20px, 9999px, 45px, 0); }
+    60% { clip: rect(70px, 9999px, 90px, 0); }
+    80% { clip: rect(5px, 9999px, 30px, 0); }
+    100% { clip: rect(40px, 9999px, 60px, 0); }
+}
+@keyframes glitch-anim-2 {
+    0% { clip: rect(35px, 9999px, 60px, 0); }
+    20% { clip: rect(15px, 9999px, 35px, 0); }
+    40% { clip: rect(65px, 9999px, 85px, 0); }
+    60% { clip: rect(25px, 9999px, 50px, 0); }
+    80% { clip: rect(80px, 9999px, 98px, 0); }
+    100% { clip: rect(10px, 9999px, 30px, 0); }
+}
